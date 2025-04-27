@@ -1,0 +1,334 @@
+:root {
+  --primary-font: 'Poppins', sans-serif;
+  --secondary-font: 'Inter', sans-serif;
+  --text-color: #e0e0e0;
+  --bg-color-start: #6a11cb;
+  --bg-color-end: #2575fc;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --card-border: rgba(255, 255, 255, 0.2);
+  --input-bg: rgba(0, 0, 0, 0.2);
+  --button-bg: #4a00e0;
+  --button-hover-bg: #8e2de2;
+  --accent-color: #8e2de2;
+  --error-color: #ff4d4d;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --spinner-color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--secondary-font);
+  color: var(--text-color);
+  background: linear-gradient(45deg, var(--bg-color-start), var(--bg-color-end));
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden; /* Prevent scrollbars from background shapes */
+  position: relative; /* Needed for absolute positioning of shapes */
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animated Background Shapes */
+.background-shapes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.background-shapes::before,
+.background-shapes::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  animation: float 20s infinite ease-in-out alternate;
+}
+
+.background-shapes::before {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  left: 15%;
+  animation-duration: 22s;
+}
+
+.background-shapes::after {
+  width: 400px;
+  height: 400px;
+  bottom: 5%;
+  right: 10%;
+  animation-duration: 18s;
+  animation-delay: -5s; /* Start at a different point */
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+  100% { transform: translateY(-30px) translateX(20px) rotate(15deg); }
+}
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px; /* Limit card width */
+  z-index: 1; /* Ensure card is above background */
+}
+
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px); /* Safari */
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px 0 var(--shadow-color);
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  font-family: var(--primary-font);
+  font-weight: 600;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  font-size: 1rem;
+  font-family: var(--secondary-font);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(142, 45, 226, 0.3);
+}
+
+input::placeholder {
+  color: rgba(224, 224, 224, 0.6);
+}
+
+/* Custom Select Dropdown Styling */
+.custom-select-wrapper {
+  position: relative;
+}
+
+select {
+  appearance: none; /* Remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2.5rem; /* Space for custom arrow */
+  cursor: pointer;
+}
+
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--text-color); /* Arrow color */
+  pointer-events: none; /* Allow clicks to pass through to select */
+  transition: transform 0.2s ease;
+}
+
+.custom-select-wrapper:focus-within .custom-arrow {
+ /* Optional: style arrow on focus */
+}
+
+
+button, .button {
+  display: inline-block; /* Needed for anchor styling */
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(45deg, var(--button-bg), var(--button-hover-bg));
+  color: #fff;
+  font-family: var(--primary-font);
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  text-decoration: none; /* For anchor tags */
+  box-shadow: 0 4px 15px 0 rgba(74, 0, 224, 0.5);
+  margin-top: 1rem; /* Spacing for generate button */
+}
+
+button:hover, .button:hover {
+  background: linear-gradient(45deg, var(--button-hover-bg), var(--button-bg));
+  box-shadow: 0 6px 20px 0 rgba(142, 45, 226, 0.6);
+  transform: translateY(-2px);
+}
+
+button:active, .button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px 0 rgba(74, 0, 224, 0.5);
+}
+
+/* Spinner Styles */
+.spinner-container {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid var(--spinner-color);
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 0.5rem auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinner-container p {
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+/* Result Styles */
+#result-container {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+h2 {
+  font-family: var(--primary-font);
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.image-wrapper {
+  width: 100%;
+  max-width: 512px; /* Limit image preview size */
+  margin: 0 auto 1rem auto;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  background-color: rgba(0,0,0,0.1); /* Placeholder bg */
+}
+
+#generated-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* Ensure image fits without distortion */
+}
+
+.download-button {
+  width: auto; /* Allow button to size to content */
+  padding: 0.8rem 2rem;
+  margin-top: 0; /* Reset margin */
+}
+
+/* Error Message */
+.error-message {
+    margin-top: 1.5rem;
+    color: var(--error-color);
+    background-color: rgba(255, 77, 77, 0.1);
+    border: 1px solid rgba(255, 77, 77, 0.3);
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  .glass-card {
+    padding: 1.5rem;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
+  button, .button {
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+  }
+  input[type="text"], select {
+    font-size: 0.9rem;
+    padding: 0.7rem 0.8rem;
+  }
+  .custom-arrow {
+    right: 0.8rem;
+  }
+  select {
+     padding-right: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+   .background-shapes::before {
+      width: 200px;
+      height: 200px;
+      left: 5%;
+   }
+    .background-shapes::after {
+      width: 250px;
+      height: 250px;
+      right: 5%;
+   }
+}

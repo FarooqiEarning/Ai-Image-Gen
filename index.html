@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>AI Image Generator</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="background-shapes"></div>
+  <div class="container">
+    <div class="glass-card">
+      <h1>AI Image Generator</h1>
+
+      <div class="form-group">
+        <label for="prompt">Image Prompt:</label>
+        <input type="text" id="prompt" placeholder="e.g., A futuristic cityscape at sunset">
+      </div>
+
+      <div class="form-group">
+        <label for="model">Select Model:</label>
+        <div class="custom-select-wrapper">
+          <select id="model">
+            <option value="Provider-3/flux-1.1-ultra">Flux Ultra</option>
+            <option value="Provider-5/flux-pro">Flux Pro</option>
+            <option value="Provider-5/flux-schnell">Flux Schnell (Server 1)</option>
+            <option value="Provider-6/flux-schnell">Flux Schnell (Server 2)</option>
+            <option value="Provider-6/flux-dev">Flux Dev</option>
+          </select>
+          <span class="custom-arrow"></span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="size">Select Size:</label>
+        <div class="custom-select-wrapper">
+          <select id="size">
+            <option value="256x256">256x256</option>
+            <option value="512x512">512x512</option>
+            <option value="1024x1024" selected>1024x1024</option>
+          </select>
+          <span class="custom-arrow"></span>
+        </div>
+      </div>
+
+      <button id="generate-btn">Generate Image</button>
+
+      <div id="loading-spinner" class="spinner-container" style="display: none;">
+        <div class="spinner"></div>
+        <p>Generating your image...</p>
+      </div>
+
+      <div id="error-message" class="error-message" style="display: none;"></div>
+
+      <div id="result-container" style="display: none;">
+        <h2>Generated Image:</h2>
+        <div class="image-wrapper">
+           <img id="generated-image" src="" alt="Generated AI Image">
+        </div>
+        <a id="download-btn" href="#" download="generated_image.png" class="button download-button">Download Image</a>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
